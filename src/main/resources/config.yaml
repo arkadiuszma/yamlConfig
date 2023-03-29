@@ -9,11 +9,9 @@ browserConfig:
 
 environment:
   int:
-    environment: int
     url: https://www.selenium.dev/
     title: Selenium
 
   test:
-    environment: test
     url: https://logback.qos.ch/
     title: Logback Home

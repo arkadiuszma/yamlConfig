@@ -9,7 +9,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 @Slf4j
-public class BrowserEnvironment extends PropertyStore{
+public class BrowserEnvironment{
     private String browser;
     private boolean headless;
     private int timeout;

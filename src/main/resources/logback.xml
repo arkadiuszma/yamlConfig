@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="false">
+    <property name="DEV_HOME" value="${user.dir}/log"/>
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %green([%thread]) %highlight(%level) %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="HTML" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${DEV_HOME}/logFile_${bySecond}.html</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${DEV_HOME}/%d{yyyy-MM-dd}.%i.html.gz</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>3</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <charset>UTF-8</charset>
+            <layout class="ch.qos.logback.classic.html.HTMLLayout">
+                <pattern>%d{HH:mm:ss.SSS}%thread%level%logger%msg</pattern>
+            </layout>
+        </encoder>
+    </appender>
+    <logger name="tests" level="debug">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="HTML"/>
+    </logger>
+    <logger name="configuration" level="debug">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="HTML"/>
+    </logger>
+    <root level="debug">
+    </root>
+</configuration>

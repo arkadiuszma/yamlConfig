@@ -38,6 +38,7 @@ public class EnvironmentProperty{
         if (environment != null && environment.containsKey(defaultEnvironment)) {
             Map<String, Object> defaultEnv = (Map<String, Object>) environment.get(defaultEnvironment);
             defaultEnv.forEach((key, value) -> System.setProperty(key, value.toString()));
+            log.debug(" >>>>>>>>>>>>>>>>>>>>> Properties loaded for load for " + defaultEnvironment);
         }
     }
 

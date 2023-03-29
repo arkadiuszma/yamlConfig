@@ -29,9 +29,7 @@ public class PropertyStore {
     private void getConfigValue() {
         Map <String, Object> properties = (Map<String, Object>) readConfigFile().get("browserConfig");
         if (properties != null) {
-            for (Map.Entry<String, Object> entry : properties.entrySet()) {
-                System.setProperty(entry.getKey(), entry.getValue().toString());
-            }
+            properties.forEach((key, value) -> System.setProperty(key, value.toString()));
         }
     }
 }

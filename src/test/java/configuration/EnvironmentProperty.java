@@ -37,9 +37,7 @@ public class EnvironmentProperty{
         log.debug(" >>>>>>>>>>>>>>>>>>>>> Environmental name: " + defaultEnvironment);
         if (environment != null && environment.containsKey(defaultEnvironment)) {
             Map<String, Object> defaultEnv = (Map<String, Object>) environment.get(defaultEnvironment);
-            for (Map.Entry<String, Object> entry : defaultEnv.entrySet()) {
-                System.setProperty(entry.getKey(), entry.getValue().toString());
-            }
+            defaultEnv.forEach((key, value) -> System.setProperty(key, value.toString()));
         }
     }
 

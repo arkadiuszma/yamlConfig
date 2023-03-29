@@ -1,6 +1,5 @@
-package browser;
+package configuration;
 
-import configuration.PropertyStore;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,7 +9,7 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 @Slf4j
-public class BrowserEnvironment {
+public class BrowserEnvironment extends PropertyStore{
     private String browser;
     private boolean headless;
     private int timeout;
@@ -24,14 +23,13 @@ public class BrowserEnvironment {
         this.timeout = 5;
         this.screenshots = false;
         this.initBrowserSettings();
-        this.getDriver();
     }
 
     private void initBrowserSettings() {
-        this.browser = PropertyStore.BROWSER.isSpecified() ? PropertyStore.BROWSER.getValue() : this.browser;
-        this.timeout = PropertyStore.TIMEOUT.isSpecified() ? PropertyStore.TIMEOUT.getIntValue() : this.timeout;
-        this.screenshots = PropertyStore.SCREENSHOTS.isSpecified() ? PropertyStore.SCREENSHOTS.getBooleanValue() : this.screenshots;
-        this.headless = PropertyStore.HEADLESS.isSpecified() ? PropertyStore.HEADLESS.getBooleanValue() : this.headless;
+        this.browser = System.getProperty("browser") != null ? System.getProperty("browser") : this.browser;
+        this.timeout = System.getProperty("timeout") != null ? getInt(System.getProperty("timeout")) : this.timeout;
+        this.screenshots = System.getProperty("screenshots") != null ? getBool(System.getProperty("screenshots")) : this.screenshots;
+        this.headless = System.getProperty("headless") != null ? getBool(System.getProperty("headless")) : this.headless;
     }
     public WebDriver getDriver(){
         switch(this.browser){
@@ -54,6 +52,13 @@ public class BrowserEnvironment {
                 driver.get(System.getProperty("url"));
             }
         }
+        log.debug("Browser: " + this.browser);
         return driver;
+    }
+    public int getInt(String value){
+        return Integer.parseInt(value);
+    }
+    public boolean getBool(String value){
+        return Boolean.parseBoolean(value);
     }
 }

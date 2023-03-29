@@ -14,8 +14,7 @@ public abstract class BaseTest {
     @BeforeEach
     protected void setupDriver() {
         EnvironmentProperty.getInstance();
-        BrowserEnvironment browserEnvironment = new BrowserEnvironment();
-        driver = browserEnvironment.getDriver();
+        driver = new BrowserEnvironment().getDriver();
         log.debug("Driver initialized properly");
     }
 

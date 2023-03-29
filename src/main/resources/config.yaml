@@ -1,0 +1,19 @@
+default environment: int
+#default environment: test
+
+browserConfig:
+  browser: edge
+  screenshots: false
+  headless: false
+  timeout: 5
+
+environment:
+  int:
+    environment: int
+    url: https://www.selenium.dev/
+    title: Selenium
+
+  test:
+    environment: test
+    url: https://logback.qos.ch/
+    title: Logback Home

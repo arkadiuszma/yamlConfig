@@ -9,6 +9,7 @@ public class TitleTest extends BaseTest{
     @Test
     @DisplayName("Title test")
     public void shouldValidateCorrectTitle(){
+        log.info("Start title test for: " + System.getProperty("url"));
         Assertions.assertThat(driver.getTitle()).isEqualTo(System.getProperty("title"));
     }
 }
